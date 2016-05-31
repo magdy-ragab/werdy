@@ -6,7 +6,7 @@ FavWin = New qApp {
 		setwindowflags( qt_dialog & ~ qt_WindowMaximizeButtonHint & qt_SubWindow)
 		setwindowmodality(true)
 		setwindowtitle("وردي - الإصدار التجريبي 0.9")
-		setwinicon(self,"images/kuran.png")
+		setwinicon(self,"images/icon.png")
 		setStyleSheet("background-image:url('images/islamic-star.png');font-family:Tahoma, Verdana, Segoe, sans-serif")
 		
 		

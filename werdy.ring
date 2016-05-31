@@ -1,5 +1,5 @@
 load "guilib.ring"
-load "globals.ring"
+load "includes/globals.ring"
 
 pODBC = odbc_init()
 if isLinux()
@@ -36,7 +36,7 @@ else
 
 
 
-	load "wnd.ring"
+	load "includes/wnd.ring"
 
 
 
@@ -118,7 +118,7 @@ func setPageData
 	suraText.setText("سورة : <b>"+ sura + "</b>")
 	jozNum.setText("الجزء : <b>"+joz+"</b> / 30")
 	
-	nfile=werdyDir()+"tmp"+DS+ "web.html"
+	nfile=werdyDir()+"web"+DS+ "web.html"
 	write(nfile, HTMLFILESTART+ayat+HTMLFILEEND)
 	ayatHTML.loadpage(new qurl("file:///"+nfile))
 	//Remove(nfile)
@@ -212,6 +212,7 @@ func settingsSubmitClicked
 		odbc_execute(pODBC, "update `user_data` set `pages`='"+setNewPages+"', `minutes`='"+ setNewMinutes +"', `clean`='"+ clean_only +"', `aya_block`='"+aya_block+"', `timeEnd`='"+timeStart+"' , `timeStart`='"+timeEnd+"'")
 		tab1.setCurrentIndex(0)
 	ok
+	ayatHTML.reload()
 
 func getCurrenpage
 	odbc_execute(pODBC, "select * from user_data")
@@ -310,6 +311,7 @@ Func changeAyatColor
 	ayat_color="rgb("+r+", " + g+ "," + b + ")"
 	q="update `user_data` set `ayat_color`='"+ayat_color+"'"
 	odbc_execute(pODBC, q)
+	ayatHTML.reload()
 	
 Func changeAyatColor2
 	cobj= new qcolordialog()
@@ -318,14 +320,90 @@ Func changeAyatColor2
     //ayatText.setstylesheet("color: rgb("+r+", " + g+ "," + b + ")")
 	no_color="rgb("+r+", " + g+ "," + b + ")"
 	q="update `user_data` set `number_color`='"+no_color+"'"
+	f= fopen('images/aya_no.svg', 'w')
+	fwrite(f, '<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   version="1.1"
+   width="45"
+   height="30"
+   id="svg2">
+  <defs
+     id="defs4" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     transform="translate(0,-1022.3622)"
+     id="layer1">
+    <path
+       d="m 7.78125,1023.6875 c 0,0 -1.0295794,2.7521 -2.0625,5.6875 -0.5164603,1.4677 -1.0417412,2.9799 -1.4375,4.25 -0.1978794,0.6351 -0.3438109,1.1947 -0.46875,1.6875 -0.1249391,0.4928 -0.25,0.818 -0.25,1.4063 l 0,0.1874 0.0625,0.1563 c 0.8416699,4.1413 3.0276495,11.0357 4.65625,13.9687 l 3.09375,-1.7187 c -1.024767,-1.8456 -3.471209,-9.0351 -4.25,-12.7187 0.010509,-0.019 0.017904,-0.1071 0.09375,-0.4063 0.099284,-0.3916 0.2509977,-0.9327 0.4375,-1.5313 0.3730046,-1.1971 0.8976925,-2.6797 1.40625,-4.125 1.017115,-2.8905 2.03125,-5.5937 2.03125,-5.5937 l -3.3125,-1.25 z"
+       id="path2987"
+       style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:'+no_color+';fill:'+no_color+';fill-opacity:1;stroke:none;stroke-width:3.52769685;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans" />
+    <path
+       d="m 7.0728476,14.940397 a 3.2582781,3.2582781 0 1 1 -6.51655626,0 3.2582781,3.2582781 0 1 1 6.51655626,0 z"
+       transform="translate(2,1022.3622)"
+       id="path3757"
+       style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:'+no_color+';stroke-width:2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:30" />
+    <path
+       d="m 36.958737,1023.7353 c 0,0 1.02958,2.7521 2.0625,5.6875 0.516461,1.4677 1.041742,2.9799 1.4375,4.25 0.19788,0.6351 0.343811,1.1947 0.46875,1.6875 0.124939,0.4928 0.25,0.818 0.25,1.4063 l 0,0.1874 -0.0625,0.1563 c -0.84167,4.1413 -3.027649,11.0357 -4.65625,13.9687 l -3.09375,-1.7187 c 1.024767,-1.8456 3.471209,-9.0351 4.25,-12.7187 -0.01051,-0.019 -0.0179,-0.1071 -0.09375,-0.4063 -0.09928,-0.3916 -0.250997,-0.9327 -0.4375,-1.5313 -0.373004,-1.1971 -0.897692,-2.6797 -1.40625,-4.125 -1.017115,-2.8905 -2.03125,-5.5937 -2.03125,-5.5937 l 3.3125,-1.25 z"
+       id="path3761"
+       style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:'+no_color+';fill:'+no_color+';fill-opacity:1;stroke:none;stroke-width:3.52769685;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans" />
+    <path
+       d="m 7.0728476,14.940397 a 3.2582781,3.2582781 0 1 1 -6.51655626,0 3.2582781,3.2582781 0 1 1 6.51655626,0 z"
+       transform="matrix(-1,0,0,1,42.739987,1022.41)"
+       id="path3763"
+       style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:'+no_color+';stroke-width:2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:30" />
+    <path
+       d="m 10.410596,1026.1768 26.509983,0"
+       id="path3765"
+       style="fill:none;stroke:'+no_color+';stroke-width:1.00770843px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    <path
+       d="m 10.410596,1048.1768 26.509983,0"
+       id="path3767"
+       style="fill:none;stroke:'+no_color+';stroke-width:1.00770843px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    <path
+       d="m 4.8429373,1034.7429 c 0,0 -0.7569393,-3.4286 -1.8700853,-3.5176 -1.0670706,-0.086 -2.40439545,0.757 -2.3598696,2.1818 0.0445258,1.4248 2.1372403,4.0073 2.1372403,4.0073"
+       id="path3837"
+       style="fill:none;stroke:'+no_color+';stroke-width:0.93099487px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    <path
+       d="m 4.8429373,1039.8908 c 0,0 -0.7569393,3.4286 -1.8700853,3.5176 -1.0670706,0.086 -2.40439545,-0.757 -2.3598696,-2.1818 0.0445258,-1.4248 2.1372403,-4.0073 2.1372403,-4.0073"
+       id="path3841"
+       style="fill:none;stroke:'+no_color+';stroke-width:0.93099487px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    <path
+       d="m 40.420595,1034.7907 c 0,0 0.75694,-3.4286 1.870086,-3.5176 1.06707,-0.086 2.404395,0.757 2.359869,2.1818 -0.04453,1.4248 -2.13724,4.0073 -2.13724,4.0073"
+       id="path3843"
+       style="fill:none;stroke:'+no_color+';stroke-width:0.93099487px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    <path
+       d="m 40.420595,1039.9386 c 0,0 0.75694,3.4286 1.870086,3.5176 1.06707,0.086 2.404395,-0.757 2.359869,-2.1818 -0.04453,-1.4248 -2.13724,-4.0073 -2.13724,-4.0073"
+       id="path3845"
+       style="fill:none;stroke:'+no_color+';stroke-width:0.93099487px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+  </g>
+</svg>')
+	fclose(f)
 	odbc_execute(pODBC, q)
+	nfile=werdyDir()+"web"+DS+ "web.html"
+	ayatHTML.reload()
 	
 
 
 func addToFavWind
 	from_page=getCurrenpage()
 	to_page=(1*(getCurrenpage()))+((1*pagesCount())-1)
-	load "fav.wnd.ring"
+	load "includes/fav.wnd.ring"
 
 func dialogBoxOk msg,w
 	new qmessagebox(w)
@@ -374,7 +452,7 @@ func WerdContRead
 	odbc_execute(pODBC, q)
 	
 func SnoozeReading
-	load "snooze.wnd.ring"
+	load "includes/snooze.wnd.ring"
 	
 func werdyDir
 	cDir= currentdir()
