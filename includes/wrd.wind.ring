@@ -3,7 +3,8 @@ WrdWinApp = New qApp {
 	winwrd = new qWidget() 
 	{
 		setparent(win1)
-		setwindowflags( qt_dialog & ~ qt_WindowMaximizeButtonHint & qt_SubWindow)
+		//setwindowflags(qt_dialog & ~ qt_WindowMaximizeButtonHint & qt_SubWindow)
+		setwindowflags(Qt_CustomizeWindowHint | Qt_WindowTitleHint | Qt_WindowStaysOnTopHint | Qt_dialog) 
 		setwindowmodality(true)
 		setwindowtitle("وردي - الإصدار التجريبي 0.9")
 		setwinicon(self,"images/icon.png")
@@ -27,14 +28,21 @@ WrdWinApp = New qApp {
 			setStyleSheet("qproperty-icon: url('images/clock.png')")
 		}
 		
-		wrdBtns = new qHBoxLayout()
+		closeWrdWin= new qPushButton(winwrd) {
+			settext("إنهاء")
+			setclickevent("SnoozeClose()")
+			setStyleSheet("qproperty-icon: url('images/del.png')")
+		}
+		
+		wrdBtns = new qHBoxLayout(winwrd)
 		{
+			addWidget(closeWrdWin)
 			addWidget(wrdRead)
 			addWidget(wrdSnooze)
 		}
 		
 		
-		wrdReadWnd= new qVBoxLayout()
+		wrdReadWnd= new qVBoxLayout(winwrd)
 		{
 			addWidget(wrdlabel)
 			addlayout(wrdBtns)
@@ -60,3 +68,10 @@ func startReadWrd
 	tab1.setCurrentIndex(0)
 	win1.activateWindow()
 	winwrd.close()
+
+func SnoozeClose
+	tab1.setCurrentIndex(0)
+	win1.showNormal()
+	win1.activateWindow()
+	winwrd.close()
+	hiddenMode()

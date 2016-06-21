@@ -261,6 +261,7 @@ func checkReadTime
 		cnow =query.value(1).tostring()
 		
 		if cdate=1
+			see "lunch"+nl
 			load 'includes/wrd.wind.ring'
 		else
 			//see "snoozed "+csnooze+" (now : "+cnow+" - cdate : "+ cdate +")"+nl
@@ -376,7 +377,8 @@ func dialogBoxOk msg,w
 		//setInformativeText(msg)
 		setstandardbuttons(QMessageBox_Yes)
 		setFixedWidth(200)
-		exec()
+		r=exec()
+		return r
 	}
 
 
@@ -408,8 +410,9 @@ func SnoozeNow
 	if prevpage<1 prevpage=1 ok
 	query.exec("update `user_data` set `pageID`='"+prevpage +"'")
 	snoozW.close()
-	hiddenMode()
 	winwrd.close()
+	hiddenMode()
+	
 	
 func WerdContRead
 	q="update `user_data` set `snoozeTo`= '2000-12-31 00:00:00'"
@@ -443,3 +446,24 @@ func searchSuraName
 		Table1.setitem(i,2,it2)
 		i++
 	end 
+
+func setdefault
+	dialogDef= new qmessagebox(win1)
+	{
+		setwindowtitle("وردي")
+		settext(" <p style='color:red; margin:20px;'>  هل تريد إستعادة الإعدادات الإفتراضية  <br />سيتم أيضاً العودة إلى الصفحة رقم 1  </span>")
+		setstandardbuttons(QMessageBox_Yes | QMessageBox_No)
+		result = exec()
+		win1
+		{
+			if result = QMessageBox_Yes
+					q= "update `user_data` set `page_id`=1,pages=3,clean=0,ayat_color='rgb(85,0,0)',number_color='rgb(44,45,0)',aya_block=0,im=0,snoozeTo='2000-12-31 00:00:00',timeEnd='01',timeStart='23'"
+					query.exec(q)
+					thePageData(1)
+					setPageData()
+					tab1.setCurrentIndex(0)
+			but result = QMessageBox_No
+				dialogDef.close()
+			ok
+		}
+	}

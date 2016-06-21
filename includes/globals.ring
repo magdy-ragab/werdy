@@ -46,5 +46,6 @@ dialogDelFavConf= NULL
 query=NULL
 oCon=NULL
 winwrd=NULL
+page1=NULL
 HTMLFILESTART='<!DOCTYPE html><head><meta charset="utf-8" /><link rel="styleSheet" href="style.css" /></head><body>'
 HTMLFILEEND='</body></html>'

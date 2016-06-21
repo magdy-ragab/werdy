@@ -3,7 +3,7 @@ FavWin = New qApp {
 		snoozW = new qWidget() 
 		{
 			setparent(winwrd)
-			setwindowflags( qt_dialog & ~ qt_WindowMaximizeButtonHint & qt_SubWindow)
+			setwindowflags(qt_dialog & ~ qt_WindowMaximizeButtonHint & qt_SubWindow )
 			setwindowmodality(true)
 			setwindowtitle("وردي - تأجيل القراءة")
 			setwinicon(self,"images/icon.png")

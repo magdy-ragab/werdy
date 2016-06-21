@@ -195,6 +195,12 @@ MainWin = New qApp {
                 }
 				
 				
+				setdefaultBtn  = new qPushButton(win2) {
+                    settext("الإعدادات الإفتراضية")
+					setStyleSheet("qproperty-icon: url('images/1466523816_Info.png'); color:red; font-weight:bold;")
+					setclickevent("setdefault()")
+                }
+				
 				picAyatColor  = new qPushButton(win2) {
                     settext("لون النص")
 					setStyleSheet("qproperty-icon: url('images/mix_document.png');")
@@ -262,6 +268,7 @@ MainWin = New qApp {
 					addLayout(layout200)
 					addLayout(layout201)
 					addLayout(layoutreadTimeSettings)
+					addWidget(setdefaultBtn)
 					addLayout(layout205)
 					addLayout(layout206)
 					addLayout(layout204)
