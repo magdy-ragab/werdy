@@ -51,10 +51,6 @@ MainWin = New qApp {
 				pageNum = new qLabel(page1) {}
 				jozNum = new qLabel(page1) {}
 				
-				/*ayatText = new qtextedit(page1) {
-					setReadOnly(true)
-					setStyleSheet("font-family:Tahoma, Verdana, Segoe, sans-serif;border:2px solid #B4A971;background-image:url('images/fff.png');border-radius:5px;")
-                }*/
 				
 				ayatHTML = new qwebview(page1){}
 				
@@ -201,6 +197,20 @@ MainWin = New qApp {
 					setclickevent("setdefault()")
                 }
 				
+				/*appTypeLabel= new qlabel(win2)
+				{
+					settext("نمط البرنامج")
+					setStyleSheet("border:0px none;")
+				}
+				
+				appTypeCombo=New QComboBox(win2) {
+                        setGeometry(150,100,200,30)
+                        alist = ["ورد","قرآءة"]
+                        for x in aList 
+							additem(x,0) 
+						next
+                }*/
+				
 				picAyatColor  = new qPushButton(win2) {
                     settext("لون النص")
 					setStyleSheet("qproperty-icon: url('images/mix_document.png');")
@@ -264,9 +274,16 @@ MainWin = New qApp {
 					addWidget(readTimeLabel1)
 				}
 				
+				/*appTypeLayout= new qHboxLayout(win2)
+				{
+					addWidget(appTypeCombo)
+					addWidget(appTypeLabel)
+				}*/
+				
 				layout203 = new qVBoxLayout(win2) {
 					addLayout(layout200)
 					addLayout(layout201)
+					//addLayout(appTypeLayout)
 					addLayout(layoutreadTimeSettings)
 					addWidget(setdefaultBtn)
 					addLayout(layout205)
@@ -288,9 +305,6 @@ MainWin = New qApp {
                 }
 				searchText = new qLineEdit(page3) {
 					setStyleSheet("background-color:#fff")
-					/*oSearchFilter = new qallevents(searchText)
-					oSearchFilter.setKeyReleaseEvent("")
-					installeventfilter(oSearchFilter)*/
                 }
 				
 				searchSuraBtn= new qPushButton(page3) {
@@ -378,7 +392,7 @@ MainWin = New qApp {
 			page5= new qwidget() {
 				myweb = new qwebview(page5)
 				{
-					loadpage(new qurl("file:///"+werdyDir()+"\help.html"))
+					loadpage(new qurl("file:///"+werdyDir()+"/web/werdy-web/public_html/index.html"))
 				}
 				
 				layoutWeb= new qVBoxLayout(page5)
@@ -396,7 +410,7 @@ MainWin = New qApp {
 				inserttab(1,page3,"  الفهرس  ")
 				inserttab(2,win2,"  إعدادات  ")
 				inserttab(3,page4,"  بحث  ")
-				/*inserttab(4,page5,"  المساعدة  ")*/
+				inserttab(4,page5,"  المساعدة  ")
 				setStyleSheet("font-family:Tahoma;")
 			}
 			

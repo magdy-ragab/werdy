@@ -1,0 +1,129 @@
+body
+{
+	font:12px/25px Tahoma;
+	direction: rtl;
+	text-align:right;
+	margin:0px;
+}
+
+a
+{
+	color: #000;
+}
+
+h1{font-size:12pt;}
+h2{font-size:10pt;}
+h3{font-size:9pt;}
+
+img
+{
+	vertical-align: middle;
+}
+
+
+#logo
+{
+	
+}
+
+#logo h1
+{
+    float: right;
+    margin-right: 13px;
+    font-size: 20px;
+    color: #5d4726;
+}
+
+#logo img
+{
+	width: 50px;
+	float: right;
+}
+
+header
+{
+	background: -moz-linear-gradient(-90deg, #f9f9f9 0, #FFFFFF 100%);
+	background: -webkit-gradient(linear, -90deg, color-stop(0, f9f9f9), color-stop(100%, FFFFFF));
+	background: -webkit-linear-gradient(-90deg, #f9f9f9 0, #FFFFFF 100%);
+	background: -o-linear-gradient(-90deg, #f9f9f9 0, #FFFFFF 100%);
+	background: -ms-linear-gradient(-90deg, #f9f9f9 0, #FFFFFF 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#1301FE', endColorstr='#F4F60C', GradientType='1');
+	background: linear-gradient(-90deg, #f9f9f9 0, #FFFFFF 100%);
+}
+
+nav
+{
+    clear: both;
+    background-color: #f5f5f5;
+    border-top: 1px solid #ccc;
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+
+
+nav a
+{
+	text-decoration: none;
+    margin-left: 10px;
+    padding: 0 10px;
+}
+
+nav a.active
+{
+	font-weight: bold;
+    display: inline-block;
+    height: 28px;
+    position: relative;
+    margin-top: -3px;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    border-top: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+	text-shadow:0 1px 1px #e8e8e8;
+	background: -moz-linear-gradient(180deg, #F7F7F7 0, #ffffff 28%);/* FF3.6+ */
+	background: -webkit-gradient(linear, 180deg, color-stop(0, F7F7F7), color-stop(28%, ffffff));/* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(180deg, #F7F7F7 0, #ffffff 28%);/* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(180deg, #F7F7F7 0, #ffffff 28%);/* Opera 11.10+ */
+	background: -ms-linear-gradient(180deg, #F7F7F7 0, #ffffff 28%);/* IE10+ */
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#1301FE', endColorstr='#F4F60C', GradientType='1'); /* for IE */
+	background: linear-gradient(180deg, #F7F7F7 0, #ffffff 28%);/* W3C */
+}
+
+
+.article_h
+{
+	border-bottom:1px solid #d4d4d4;
+	background-color: #f5f5f5;
+}
+
+
+.article_h::before
+{
+	content:"»";
+	font: bold 11pt/25px tahoma;
+    margin-right: 10px;
+    margin-left: 10px;
+    color: #737373;
+}
+
+article p
+{
+	text-align: justify;
+	margin:0 10px;
+}
+
+article p a
+{
+	color: blue;
+}
+
+.center
+{
+	text-align:center;
+}
+
+.images
+{
+	border:1px solid #ccc;
+}

@@ -47,5 +47,6 @@ query=NULL
 oCon=NULL
 winwrd=NULL
 page1=NULL
+//appTypeCombo=NULL
 HTMLFILESTART='<!DOCTYPE html><head><meta charset="utf-8" /><link rel="styleSheet" href="style.css" /></head><body>'
 HTMLFILEEND='</body></html>'

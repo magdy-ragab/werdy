@@ -19,7 +19,8 @@ TafsserWin = New qApp {
 		{
 			pagea1=getCurrenpage()
 			pagea2=(getCurrenpage()+pagesCount())-1
-			m= ""
+			see pagea1+" - "+pagea2+nl
+			m=''
 			
 			for i = pagea1 to pagea2
 				tafseerAyat=tafseerAyatClean(i)
@@ -28,9 +29,9 @@ TafsserWin = New qApp {
 				query.exec( q)
 				m+="<p align=left style='background-color:lightgray'><span>صفحة : "+ i +"</span></p>"
 				while query.movenext()
-					aya= 1*(query.value(4).tostring())
-					ayaID= 1*(query.value(1).tostring())
-					tafseerText= query.value(5).tostring()
+					aya= (query.value(3).tostring())
+					ayaID= (query.value(3).tostring())
+					tafseerText= query.value(4).tostring()
 					m+= "<p>("+ aya +")&nbsp;&nbsp;&nbsp;<span style='color:rgb(50,50,50);'>"+ tafseerAyat[jq] +"</span><br /><strong>"+tafseerText+"</strong></p>"
 					jq++
 				end 

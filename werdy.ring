@@ -1,5 +1,5 @@
 load "guilib.ring"
-load "includes/globals.ring"
+load "includes\globals.ring"
 
 
 oCon = new QSqlDatabase()
@@ -15,7 +15,7 @@ ayat_color= getAyatColor()
 no_color= getNumColor()
 aya_block= aya_block_func()
 
-load "includes/wnd.ring"
+load "includes\wnd.ring"
 
 
 
@@ -164,6 +164,7 @@ func settingsSubmitClicked
 	setNewMinutes = spinner2.value()
 	clean_only = clean_label.ischecked()
 	aya_block = aya_block_check.ischecked()
+	//apptype= appTypeCombo.currentText()
 	
 	timeStart=readTimeCombo1.value()
 	timeEnd=readTimeCombo2.value()
@@ -262,7 +263,7 @@ func checkReadTime
 		
 		if cdate=1
 			see "lunch"+nl
-			load 'includes/wrd.wind.ring'
+			load 'includes\wrd.wind.ring'
 		else
 			//see "snoozed "+csnooze+" (now : "+cnow+" - cdate : "+ cdate +")"+nl
 		ok
@@ -367,7 +368,7 @@ Func changeAyatColor2
 func addToFavWind
 	from_page=getCurrenpage()
 	to_page=(1*(getCurrenpage()))+((1*pagesCount())-1)
-	load "includes/fav.wnd.ring"
+	load "includes\fav.wnd.ring"
 
 func dialogBoxOk msg,w
 	new qmessagebox(w)
@@ -419,14 +420,14 @@ func WerdContRead
 	query.exec( q)
 	
 func SnoozeReading
-	load "includes/snooze.wnd.ring"
+	load "includes\snooze.wnd.ring"
 	
 func werdyDir
 	cDir= currentdir()
 	return cDir+DS
 
 func tafseer
-	load 'includes/tafseer.ring'
+	load 'includes\tafseer.ring'
 
 func searchSuraName
 	Table1.setRowCount(0)
