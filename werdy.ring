@@ -33,15 +33,16 @@ func prevClicked
 
 func thePageData px
 	ayat=''
-	see px+nl
+	//see px+nl
 	im= get_img()
 	
 	for i=0 to (1*pagesCount())-1
 		q= "select * from Quran q where `page`='"+ (px+i) +"'"
 		query.exec(q)
 		if( (px+i)%2 ) d="left" else d="right" ok
-		ayat+='<p style="text-align:'+d+';" class="pageNum"><span>'+ (px+i) +'</span></p>'
-		ayat+="<p class='pageText'>"
+		ayat+='<p style="text-align:'+d+';color:#5F5D5D;background-color:#D9D9D9;line-height:20px;border-radius:5px;padding:0;margin:0;height:22px;" class="pageNum"><span>'+ (px+i) +'</span></p>'
+		//ayat+="<p class='pageText'>"
+		ayat+="<p class='pageText' align='justify' style='"+ayaTextStyle+"'>"
 		while query.movenext()
 			theid= query.value(0).tostring()
 			aya_no= query.value(2).tostring()
@@ -51,7 +52,7 @@ func thePageData px
 			suraName= query.value(7).tostring()
 			sura  =suraName
 			if(aya_no = 1)
-				ayat += "</p><h2 style='color:blue;padding:0px; margin:0px;' align=center>("+ suraName +")</h2><p class='pageText'>" 
+				ayat += "</p><h2 style='color:blue;padding:0px; margin:0px;' align=center>("+ suraName +")</h2><p class='pageText' align='justify' style='"+ayaTextStyle+"'>" 
 			ok
 			
 			if(clean_only=1)
@@ -64,7 +65,8 @@ func thePageData px
 				aya_text= "<span style='background-color:#feffe8;font-weight:bold;'>"+aya_text+"</span>"
 			ok
 			
-			ayat += "<span style='color:"+ayat_color+"'>"+  aya_text +"</span>"+ " <span style='color:"+no_color+";' class='ayaNum'>"+ aya_no +"</span> " 
+			ayat += "<span style='color:"+ayat_color+"'>"+  aya_text +"</span>"+ " <span style='color:"+no_color+";;
+			font-size:9pt;font-family:Tahoma;' class='ayaNum'>{"+ aya_no +"}</span> " 
 			
 			if(aya_block=1)
 				ayat+="<br />"
@@ -88,9 +90,11 @@ func setPageData
 	suraText.setText("سورة : <b>"+ sura + "</b>")
 	jozNum.setText("الجزء : <b>"+joz+"</b> / 30")
 	
-	nfile=werdyDir()+"web"+DS+ "web.html"
-	write(nfile, HTMLFILESTART+ayat+HTMLFILEEND)
-	ayatHTML.loadpage(new qurl("file:///"+nfile))
+	//nfile=werdyDir()+"web"+DS+ "web.html"
+	//write(nfile, HTMLFILESTART+ayat+HTMLFILEEND)
+	//ayatHTML.loadpage(new qurl("file:///"+nfile))
+	ayatHTML.settext('')
+	ayatHTML.insertHtml(LINESTART+ayat+LINEEND)
 	//Remove(nfile)
 
 
@@ -186,7 +190,7 @@ func settingsSubmitClicked
 	getAyatColor()
 	thePageData(getCurrenpage())
 	setPageData()
-	ayatHTML.reload()
+	//ayatHTML.reload()
 
 func getCurrenpage
 	query.exec("select * from user_data")
@@ -265,7 +269,7 @@ func checkReadTime
 			see "lunch"+nl
 			load 'includes\wrd.wind.ring'
 		else
-			//see "snoozed "+csnooze+" (now : "+cnow+" - cdate : "+ cdate +")"+nl
+			see "snoozed "+csnooze+" (now : "+cnow+" - cdate : "+ cdate +")"+nl
 		ok
 	ok
 Func changeAyatColor
@@ -276,7 +280,7 @@ Func changeAyatColor
 	ayat_color="rgb("+r+", " + g+ "," + b + ")"
 	q="update `user_data` set `ayat_color`='"+ayat_color+"'"
 	query.exec( q)
-	ayatHTML.reload()
+	//ayatHTML.reload()
 	
 Func changeAyatColor2
 	cobj= new qcolordialog()
@@ -285,7 +289,7 @@ Func changeAyatColor2
     //ayatText.setstylesheet("color: rgb("+r+", " + g+ "," + b + ")")
 	no_color="rgb("+r+", " + g+ "," + b + ")"
 	q="update `user_data` set `number_color`='"+no_color+"'"
-	f= fopen('images/aya_no.svg', 'w')
+	/*f= fopen('images/aya_no.svg', 'w')
 	fwrite(f, '<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
    xmlns:dc="http://purl.org/dc/elements/1.1/"
@@ -358,10 +362,10 @@ Func changeAyatColor2
        style="fill:none;stroke:'+no_color+';stroke-width:0.93099487px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
   </g>
 </svg>')
-	fclose(f)
+	fclose(f)*/
 	query.exec( q)
 	nfile=werdyDir()+"web"+DS+ "web.html"
-	ayatHTML.reload()
+	//ayatHTML.reload()
 	
 
 

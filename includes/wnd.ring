@@ -52,7 +52,11 @@ MainWin = New qApp {
 				jozNum = new qLabel(page1) {}
 				
 				
-				ayatHTML = new qwebview(page1){}
+				ayatHTML = new qtextedit(page1){
+					setReadOnly(true)
+					alignment(Qt_AlignJustify)
+					setStyleSheet("background-image:url('images/fff.png');background-color: #fff;font-family:Tahoma;font-size:13px;line-height:30px;")
+				}
 				
 				TafseerBtn = new qPushButton(page1) {
                         settext("التفسير")
@@ -389,7 +393,7 @@ MainWin = New qApp {
 				
 			}
 /* help */
-			page5= new qwidget() {
+			/*page5= new qwidget() {
 				myweb = new qwebview(page5)
 				{
 					loadpage(new qurl("file:///"+werdyDir()+"/web/werdy-web/public_html/index.html"))
@@ -401,7 +405,7 @@ MainWin = New qApp {
 				}
 				setLayout(layoutWeb)
 				
-			}
+			}*/
 			
 			
 			tab1 = new qtabwidget(win1) {
@@ -410,7 +414,7 @@ MainWin = New qApp {
 				inserttab(1,page3,"  الفهرس  ")
 				inserttab(2,win2,"  إعدادات  ")
 				inserttab(3,page4,"  بحث  ")
-				inserttab(4,page5,"  المساعدة  ")
+				//inserttab(4,page5,"  المساعدة  ")
 				setStyleSheet("font-family:Tahoma;")
 			}
 			

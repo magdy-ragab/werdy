@@ -50,3 +50,6 @@ page1=NULL
 //appTypeCombo=NULL
 HTMLFILESTART='<!DOCTYPE html><head><meta charset="utf-8" /><link rel="styleSheet" href="style.css" /></head><body>'
 HTMLFILEEND='</body></html>'
+LINESTART="<p style='font-size:16pt;font-weight:bold;text-align: justify;padding:0;margin:0;'>"
+LINEEND="</p>"
+ayaTextStyle="text-align:justift;line-height:25px;font-family:Tahoma; font-size:10pt;font-weight:bold;"

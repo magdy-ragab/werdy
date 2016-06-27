@@ -19,7 +19,7 @@ TafsserWin = New qApp {
 		{
 			pagea1=getCurrenpage()
 			pagea2=(getCurrenpage()+pagesCount())-1
-			see pagea1+" - "+pagea2+nl
+			//see pagea1+" - "+pagea2+nl
 			m=''
 			
 			for i = pagea1 to pagea2
