@@ -6,8 +6,8 @@ FavWin = New qApp {
 		setwindowflags( qt_dialog & ~ qt_WindowMaximizeButtonHint & qt_SubWindow)
 		setwindowmodality(true)
 		setwindowtitle("وردي - الإصدار التجريبي 0.9")
-		setwinicon(self,"images/kuran.png")
-		setStyleSheet("background-image:url('images/islamic-star.png');font-family:Tahoma, Verdana, Segoe, sans-serif")
+		setwinicon(self,"icon.png")
+		setStyleSheet("background-image:url('islamic-star.png');font-family:Tahoma, Verdana, Segoe, sans-serif")
 		
 		
 		
@@ -23,7 +23,7 @@ FavWin = New qApp {
 		addToFavBtn= new qPushButton(page4) {
 			settext("إضافة")
 			setclickevent("addFav()")
-			setStyleSheet("qproperty-icon: url('images/add.png')")
+			setStyleSheet("qproperty-icon: url('add.png')")
 		}
 		
 		
@@ -42,13 +42,13 @@ FavWin = New qApp {
 		delFavBtn= new qPushButton(page4) {
 			settext("حذف")
 			setclickevent("delFav()")
-			setStyleSheet("qproperty-icon: url('images/del.png')")
+			setStyleSheet("qproperty-icon: url('del.png')")
 		}
 		
 		goToFavBtn= new qPushButton(page4) {
 			settext("ذهاب إلى العلامة")
 			setclickevent("goToFav()")
-			setStyleSheet("qproperty-icon: url('images/bookmark.png')")
+			setStyleSheet("qproperty-icon: url('bookmark.png')")
 		}
 		
 		
@@ -76,7 +76,7 @@ FavWin = New qApp {
 		
 		setLayout(layout211)
 		pobulate_fav()
-		show()
+                showfullscreen()
 		
 		
 	}
@@ -97,54 +97,54 @@ func delFav
 		settext("هل تريد حذف العلامة المرجعية؟")
 		setstandardbuttons(QMessageBox_Yes | QMessageBox_No)
 		result = exec()
-		win1 {
-			if result= QMessageBox_Yes
-				rpage= table3.currentRow()
-				q= "select * from `fav` limit "+rpage+",1"
-				odbc_execute(pODBC, q)
-				odbc_fetch(pODBC)
-				favID= 1*(odbc_getdata(pODBC,1))
-				odbc_execute(pODBC, "delete from `fav` where `ID`='"+ favID +"'" )
-				pobulate_fav()
-			but result= QMessageBox_No
+		winaddfav
+		{
+			if result = QMessageBox_Yes
+				row=table3.currentRow()
+				if row= -1
+					dialogBoxOk("لم تقم بتحديد صفحة !!", dialogDelFavConf)
+				else
+					row= table3.item(table3.currentRow(),1).text()
+					q= "delete from `fav` where `page`='"+ row +"'"
+					see q+nl
+					query.exec(q)
+					pobulate_fav()
+				ok
+			but result = QMessageBox_No
 				dialogDelFavConf.close()
 			ok
 		}
 	}
 	
 func goToFav
-	rpage= table3.currentRow()
-	q= "select * from `fav` limit "+rpage+",1"
-	odbc_execute(pODBC, q)
-	odbc_fetch(pODBC)
-	p= 1*(odbc_getdata(pODBC,4))
-	
-	odbc_execute(pODBC, "select * from `Quran` where `page`='"+p+"'")
-	odbc_fetch(pODBC)
-	ayatID=1*odbc_getdata(pODBC,3)
-	thePageData(p)
-	setPageData()
-	winaddfav.close()
-	tab1.setCurrentIndex(0)
+	row=table3.currentRow()
+	if row= -1
+		dialogBoxOk("لم تقم بتحديد صفحة !!", winaddfav)
+		//see "error"+nl
+	else
+		favPageID= 1*(table3.item(row,1).text())
+		see favPageID+nl
+		/*query.exec("select * from `Quran` where `page`='"+rpage+"'")
+		query.movenext()
+		ayatID=1*query.value(3).tostring()*/
+		thePageData(favPageID)
+		setPageData()
+		winaddfav.close()
+		tab1.setCurrentIndex(0)
+	ok
 	
 func addFav
 	p= qPages.currentText()
-	odbc_execute(pODBC, "select `SuraID`,name from Quran where `page`='"+ p +"'")
-	odbc_fetch(pODBC)
-	favSuraName= odbc_getdata(pODBC,2)
-	favSuraID= odbc_getdata(pODBC,1)
-	
-	q= "select `ID` from `fav` where `page`='"+ p +"'"
-	odbc_execute(pODBC, q)
-	odbc_fetch(pODBC)
-	r= odbc_getdata(pODBC,1)
-	if(r)
-		dialogBoxOk("عفواً ... هذ الصفحة موجودة من قبل", winaddfav)
-	else
-		q= "insert into `fav` (`SuraID`, `name`, `page`, `dateline`) values('"+ favSuraID +"', '"+favSuraName+"', '"+ p +"', datetime())"
-		odbc_execute(pODBC, q)
-		pobulate_fav()
-	ok
+	q= "select * from Quran where `page`='"+ p +"'"
+	see q
+	query.exec(q)
+	query.movenext()
+	favSuraName= query.value(7).tostring()
+	favSuraID= query.value(1).tostring()
+	q= "insert into `fav` (`SuraID`, `name`, `page`, `dateline`) values('"+ favSuraID +"', ('"+(favSuraName)+"'), '"+ p +"', datetime())"
+	query.exec( q)
+	pobulate_fav()
+
 	
 	
 
@@ -152,13 +152,13 @@ func pobulate_fav
 	m= table3.setRowCount(0)
 	q= "select * from `fav` order by ID asc"
 	i=0
-	odbc_execute(pODBC, q)
-	while odbc_fetch(pODBC)
+	query.exec( q)
+	while query.movenext()
 		table3.insertRow(i)
 		
-		it1=QTableWidgetItem_new(odbc_getdata(pODBC,3))
-		it2=QTableWidgetItem_new(odbc_getdata(pODBC,4))
-		it3=QTableWidgetItem_new(odbc_getdata(pODBC,5))
+		it1=QTableWidgetItem_new(query.value(2).tostring())
+		it2=QTableWidgetItem_new(query.value(3).tostring())
+		it3=QTableWidgetItem_new(query.value(4).tostring())
 		
 		table3.setitem(i,0,it1)
 		table3.setitem(i,1,it2)

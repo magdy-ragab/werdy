@@ -1,0 +1,37 @@
+<RCC>
+    <qresource prefix="/resources">
+        <file alias="myfile4">test.ring</file>
+        <file alias="myfile5">ring_qt.ring</file>
+        <file alias="myfile6">qt.rh</file>
+        <file alias="myfile7">guilib.ring</file>
+        <file alias="1464846947_book.png">1464846947_book.png</file>
+        <file alias="1466523816_Info.png">1466523816_Info.png</file>
+        <file alias="add.png">add.png</file>
+        <file alias="apply.png">apply.png</file>
+        <file alias="arrow-left-01.png">arrow-left-01.png</file>
+        <file alias="arrow-right-01.png">arrow-right-01.png</file>
+        <file alias="bookmark.png">bookmark.png</file>
+        <file alias="clock.png">clock.png</file>
+        <file alias="color.png">color.png</file>
+        <file alias="del.png">del.png</file>
+        <file alias="fb.png">fb.png</file>
+        <file alias="fff.png">fff.png</file>
+        <file alias="help.png">help.png</file>
+        <file alias="hide.png">hide.png</file>
+        <file alias="icon.png">icon.png</file>
+        <file alias="icon-small.png">icon-small.png</file>
+        <file alias="islamic-star.png">islamic-star.png</file>
+        <file alias="me.jpg">me.jpg</file>
+        <file alias="mix_document.png">mix_document.png</file>
+        <file alias="page_num.svg">page_num.svg</file>
+        <file alias="search.png">search.png</file>
+        <file alias="fav.wnd.ring">fav.wnd.ring</file>
+        <file alias="globals.ring">globals.ring</file>
+        <file alias="snooze.wnd.ring">snooze.wnd.ring</file>
+        <file alias="sura.ring">sura.ring</file>
+        <file alias="tafseer.ring">tafseer.ring</file>
+        <file alias="wnd.ring">wnd.ring</file>
+        <file alias="wrd.wind.ring">wrd.wind.ring</file>
+        <file alias="quran.db.sqlite">quran.db.sqlite</file>
+    </qresource>
+</RCC>

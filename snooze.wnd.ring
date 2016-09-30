@@ -2,12 +2,12 @@ FavWin = New qApp {
 	
 		snoozW = new qWidget() 
 		{
-			setparent(win1)
-			setwindowflags( qt_dialog & ~ qt_WindowMaximizeButtonHint & qt_SubWindow)
+			setparent(winwrd)
+			setwindowflags(qt_dialog & ~ qt_WindowMaximizeButtonHint & qt_SubWindow )
 			setwindowmodality(true)
 			setwindowtitle("وردي - تأجيل القراءة")
-			setwinicon(self,"images/kuran.png")
-			setStyleSheet("background-image:url('images/islamic-star.png');font-family:Tahoma, Verdana, Segoe, sans-serif")
+                        setwinicon(self,"icon.png")
+                        setStyleSheet("background-image:url('islamic-star.png');font-family:Tahoma, Verdana, Segoe, sans-serif")
 			
 			
 			
@@ -23,7 +23,7 @@ FavWin = New qApp {
 			snoozNowBtn= new qPushButton(snoozW) {
 				settext("تأجيل")
 				setclickevent("SnoozeNow()")
-				setStyleSheet("qproperty-icon: url('images/apply.png')")
+                                setStyleSheet("qproperty-icon: url('apply.png')")
 			}
 			snoozeTextNotice = new qLabel(snoozW) {settext("  في حالة التشغيل اليدوي يتم إعادة تشغيل الورد من الإعدادات  ")}
 			
@@ -42,6 +42,6 @@ FavWin = New qApp {
 			
 			
 			setLayout(layoutSnooze2)
-			show()
+                        showfullscreen()
 		}
 	}
